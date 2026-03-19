@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YMC.CLO - Yo's Midnight Club. Premium automotive lifestyle brand for the self-made. Exclusive streetwear meets car culture in the Tri-State area.">
+    <meta name="keywords" content="YMC, automotive lifestyle, streetwear, car culture, German cars, midnight club, funded auto brokerage">
+    <title>YMC.CLO | YO'S MIDNIGHT CLUB - Built Not Bought</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================
+           RESET & BASE STYLES
+        ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Base Neutrals */
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --charcoal: #2a2a2a;
+            --steel: #3a3a3a;
+            --silver: #9a9a9a;
+            --white: #ffffff;
+            --off-white: #f5f5f5;
+
+            /* ── NEW PALETTE ── */
+            --deep-red:    #5E0006;   /* darkest – backgrounds, borders */
+            --blood-red:   #9B0F06;   /* mid – hover states, accents    */
+            --ember:       #D53E0F;   /* bright – primary CTA, glows    */
+            --parchment:   #EED9B9;   /* light – text highlights, fills */
+
+            /* Semantic aliases (drop-in replacements for old --cyan vars) */
+            --cyan:        var(--ember);
+            --cyan-bright: #E84F1A;          /* slightly lighter ember */
+            --cyan-dark:   var(--blood-red);
+            --cyan-glow:   rgba(213, 62, 15, 0.45);
+
+            /* Typography */
+            --font-display: 'Bebas Neue', cursive;
+            --font-body: 'Rajdhani', sans-serif;
+            --font-accent: 'Russo One', sans-serif;
+            
+            /* Spacing */
+            --section-padding: 100px 0;
+            --container-width: 1400px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--black);
+            color: var(--off-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-weight: 500;
+            position: relative;
+        }
+
+        /* ==========================================
+           HEX MESH OVERLAY
+        ========================================== */
+        .hex-mesh {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            background-image: 
+                radial-gradient(circle at center, transparent 0%, rgba(213, 62, 15, 0.03) 100%),
+                repeating-linear-gradient(0deg,   transparent, transparent 40px, rgba(213, 62, 15, 0.07) 40px, rgba(213, 62, 15, 0.07) 41px),
+                repeating-linear-gradient(60deg,  transparent, transparent 40px, rgba(213, 62, 15, 0.07) 40px, rgba(213, 62, 15, 0.07) 41px),
+                repeating-linear-gradient(120deg, transparent, transparent 40px, rgba(213, 62, 15, 0.07) 40px, rgba(213, 62, 15, 0.07) 41px);
+        }
+        body:hover .hex-mesh { opacity: 1; }
+
+        /* Garage light – radial glow following cursor */
+        .garage-light {
+            position: fixed;
+            width: 400px; height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(213, 62, 15, 0.18) 0%, rgba(155, 15, 6, 0.07) 30%, transparent 70%);
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        body:hover .garage-light { opacity: 1; }
+
+        ::selection {
+            background-color: var(--ember);
+            color: var(--black);
+        }
+
+        /* ==========================================
+           TYPOGRAPHY
+        ========================================== */
+        h1,h2,h3,h4,h5,h6 {
+            font-family: var(--font-display);
+            line-height: 1;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        h1 { font-size: clamp(3rem, 8vw, 8rem); }
+        h2 { font-size: clamp(2.5rem, 6vw, 5rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 3rem); }
+        p  { font-size: 1.125rem; line-height: 1.8; color: var(--silver); font-weight: 500; }
+
+        /* ==========================================
+           UTILITY
+        ========================================== */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        .section { padding: var(--section-padding); position: relative; }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ==========================================
+           BUTTONS
+        ========================================== */
+        .btn {
+            display: inline-block;
+            padding: 18px 45px;
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-weight: 400;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(238, 217, 185, 0.25), transparent);
+            transition: left 0.5s;
+        }
+        .btn:hover::before { left: 100%; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--ember) 0%, var(--blood-red) 100%);
+            color: var(--parchment);
+            border: 2px solid var(--ember);
+            font-weight: 700;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #E84F1A 0%, var(--ember) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px var(--cyan-glow);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--parchment);
+            border: 2px solid var(--ember);
+        }
+        .btn-outline:hover {
+            background: linear-gradient(135deg, var(--ember) 0%, var(--blood-red) 100%);
+            color: var(--parchment);
+            box-shadow: 0 15px 40px var(--cyan-glow);
+        }
+
+        /* ==========================================
+           NAVIGATION
+        ========================================== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(213, 62, 15, 0.3);
+        }
+        .navbar.scrolled {
+            background-color: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 5px 30px rgba(94, 0, 6, 0.4);
+            border-bottom-color: rgba(213, 62, 15, 0.5);
+        }
+
+        .nav-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        .logo img {
+            height: 40px; width: auto;
+            filter: brightness(0) invert(1);
+            transition: all 0.3s ease;
+        }
+        .logo:hover img {
+            filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(213,62,15,0.6));
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--white);
+            letter-spacing: 3px;
+        }
+        .logo-text .accent {
+            color: var(--ember);
+            text-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-menu a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: var(--font-body);
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--ember), #E84F1A);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+        .nav-menu a:hover { color: var(--parchment); }
+        .nav-menu a:hover::after { width: 100%; }
+
+        .discord-btn { padding: 12px 30px; font-size: 0.95rem; }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+        .menu-toggle span {
+            width: 30px; height: 3px;
+            background: linear-gradient(90deg, var(--ember), #E84F1A);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(8px,8px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(8px,-8px); }
+
+        /* ==========================================
+           HERO
+        ========================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 100px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #0a0a0a 0%, #140003 100%);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(94, 0, 6, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(94, 0, 6, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 30%; left: 50%;
+            transform: translateX(-50%);
+            width: 900px; height: 900px;
+            background: radial-gradient(circle, rgba(213, 62, 15, 0.14) 0%, rgba(94,0,6,0.06) 40%, transparent 70%);
+            z-index: 0;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%,100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+            50%      { opacity: 1;   transform: translateX(-50%) scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            padding: 0 30px;
+        }
+
+        .hero-tag {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--ember);
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        .hero-title {
+            font-size: clamp(4rem, 10vw, 9rem);
+            line-height: 0.9;
+            margin-bottom: 30px;
+            color: var(--white);
+            text-shadow: 0 5px 30px rgba(0,0,0,0.8);
+        }
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--parchment) 0%, var(--ember) 40%, var(--parchment) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+            display: block;
+            filter: drop-shadow(0 0 30px var(--cyan-glow));
+        }
+        @keyframes shimmer { to { background-position: 200% center; } }
+
+        .hero-subtitle {
+            font-family: var(--font-accent);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--parchment);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--silver);
+            margin-bottom: 50px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            flex-wrap: wrap;
+            padding-top: 50px;
+            border-top: 1px solid rgba(213, 62, 15, 0.3);
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--ember) 0%, var(--parchment) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 20px var(--cyan-glow));
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--silver);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px; left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        .scroll-down i {
+            font-size: 2rem;
+            color: var(--ember);
+            filter: drop-shadow(0 0 10px var(--cyan-glow));
+        }
+        @keyframes bounce {
+            0%,20%,50%,80%,100% { transform: translateY(0) translateX(-50%); }
+            40%                  { transform: translateY(-20px) translateX(-50%); }
+            60%                  { transform: translateY(-10px) translateX(-50%); }
+        }
+
+        /* ==========================================
+           DIVIDER STRIPE
+        ========================================== */
+        .cyan-stripe {
+            height: 3px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--deep-red) 20%,
+                var(--ember) 50%,
+                var(--deep-red) 80%,
+                transparent 100%
+            );
+            box-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        /* ==========================================
+           MANIFESTO
+        ========================================== */
+        .manifesto-section { background-color: var(--dark-gray); }
+
+        .manifesto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .manifesto-image { position: relative; }
+        .manifesto-image img {
+            width: 100%; height: auto;
+            display: block;
+            filter: grayscale(20%) brightness(0.95);
+            border: 3px solid var(--ember);
+            box-shadow: 0 0 50px rgba(213,62,15,0.35);
+            transition: all 0.4s ease;
+        }
+        .manifesto-image:hover img {
+            filter: grayscale(0%) brightness(1);
+            box-shadow: 0 0 70px rgba(213,62,15,0.5);
+        }
+
+        .founder-badge {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.98), rgba(10,10,10,0.7), transparent);
+            padding: 30px;
+        }
+        .founder-label {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--ember);
+            margin-bottom: 5px;
+        }
+        .founder-name {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--white);
+            letter-spacing: 4px;
+        }
+
+        .manifesto-content { max-width: 650px; }
+        .manifesto-tag {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--ember);
+            margin-bottom: 20px;
+        }
+        .manifesto-title {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            margin-bottom: 30px;
+            color: var(--white);
+        }
+        .manifesto-content p { margin-bottom: 20px; font-size: 1.125rem; }
+        .manifesto-content strong { color: var(--white); font-weight: 700; }
+        .highlight-cyan { color: var(--ember); font-weight: 700; }
+
+        .manifesto-quote {
+            background: linear-gradient(135deg, rgba(213,62,15,0.1) 0%, rgba(94,0,6,0.05) 100%);
+            border-left: 4px solid var(--ember);
+            padding: 25px;
+            margin: 30px 0;
+            font-style: italic;
+            color: var(--parchment);
+            box-shadow: 0 0 30px rgba(94,0,6,0.15);
+        }
+
+        .manifesto-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .manifesto-stat {
+            background: linear-gradient(135deg, rgba(213,62,15,0.1) 0%, rgba(94,0,6,0.05) 100%);
+            border: 2px solid rgba(213,62,15,0.35);
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .manifesto-stat:hover {
+            border-color: var(--ember);
+            box-shadow: 0 0 30px var(--cyan-glow);
+        }
+        .manifesto-stat-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--ember) 0%, var(--parchment) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .manifesto-stat-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--silver);
+        }
+
+        /* ==========================================
+           COLLECTION
+        ========================================== */
+        .collection-section { background-color: var(--black); }
+
+        .collection-header { text-align: center; margin-bottom: 70px; }
+        .collection-tag {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--ember);
+            margin-bottom: 20px;
+        }
+        .collection-title {
+            font-size: clamp(3rem, 6vw, 6rem);
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        .collection-description {
+            font-size: 1.25rem;
+            color: var(--silver);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+        .product-card {
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--steel) 100%);
+            border: 2px solid rgba(213,62,15,0.25);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .product-card:hover {
+            border-color: var(--ember);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(213,62,15,0.3);
+        }
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background-color: var(--steel);
+        }
+        .product-image img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .product-card:hover .product-image img { transform: scale(1.08); }
+
+        .product-badge {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: linear-gradient(135deg, var(--ember) 0%, var(--blood-red) 100%);
+            color: var(--parchment);
+            padding: 8px 20px;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            box-shadow: 0 0 25px var(--cyan-glow);
+        }
+
+        .product-info { padding: 35px; }
+        .product-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+        .product-description {
+            font-size: 0.875rem;
+            color: var(--silver);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        .product-price {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--ember) 0%, var(--parchment) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        /* Product Features */
+        .product-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            padding-top: 80px;
+            border-top: 1px solid rgba(213,62,15,0.25);
+        }
+        .feature-item { text-align: center; }
+        .feature-icon {
+            width: 90px; height: 90px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, rgba(213,62,15,0.12) 0%, rgba(94,0,6,0.06) 100%);
+            border: 2px solid var(--ember);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .feature-item:hover .feature-icon {
+            background: linear-gradient(135deg, var(--ember) 0%, var(--blood-red) 100%);
+            box-shadow: 0 0 40px var(--cyan-glow);
+            transform: scale(1.05);
+        }
+        .feature-icon i { font-size: 2.2rem; color: var(--ember); transition: color 0.3s ease; }
+        .feature-item:hover .feature-icon i { color: var(--parchment); }
+        .feature-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        .feature-description { font-size: 1rem; color: var(--silver); line-height: 1.7; }
+
+        /* ==========================================
+           MEMBERSHIP PROCESS
+        ========================================== */
+        .process-section { background-color: var(--dark-gray); }
+
+        .process-header { text-align: center; margin-bottom: 80px; }
+        .process-tag {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--ember);
+            margin-bottom: 20px;
+        }
+        .process-title {
+            font-size: clamp(3rem, 6vw, 6rem);
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        .process-description {
+            font-size: 1.25rem;
+            color: var(--silver);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+        }
+        .process-step {
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--steel) 100%);
+            border: 2px solid rgba(213,62,15,0.25);
+            padding: 45px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .process-step:hover {
+            border-color: var(--ember);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(213,62,15,0.3);
+        }
+
+        .step-number {
+            width: 110px; height: 110px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, var(--ember) 0%, var(--deep-red) 100%);
+            color: var(--parchment);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            box-shadow: 0 0 40px var(--cyan-glow);
+        }
+        .step-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+        .step-description { color: var(--silver); line-height: 1.8; font-size: 1.125rem; }
+        .step-code {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(213,62,15,0.15) 0%, rgba(94,0,6,0.08) 100%);
+            border: 2px solid var(--ember);
+            color: var(--parchment);
+            padding: 12px 25px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        /* ==========================================
+           BENEFITS
+        ========================================== */
+        .benefits-section { background-color: var(--black); }
+
+        .benefits-header { text-align: center; margin-bottom: 80px; }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .benefit-card {
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--steel) 100%);
+            border: 2px solid rgba(213,62,15,0.25);
+            padding: 50px;
+            transition: all 0.4s ease;
+        }
+        .benefit-card:hover {
+            border-color: var(--ember);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(213,62,15,0.3);
+        }
+        .benefit-icon {
+            width: 90px; height: 90px;
+            background: linear-gradient(135deg, rgba(213,62,15,0.12) 0%, rgba(94,0,6,0.06) 100%);
+            border: 2px solid var(--ember);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        .benefit-card:hover .benefit-icon {
+            background: linear-gradient(135deg, var(--ember) 0%, var(--blood-red) 100%);
+            box-shadow: 0 0 40px var(--cyan-glow);
+        }
+        .benefit-icon i { font-size: 2.2rem; color: var(--ember); transition: color 0.3s ease; }
+        .benefit-card:hover .benefit-icon i { color: var(--parchment); }
+        .benefit-title {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--white);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        .benefit-description { color: var(--silver); line-height: 1.8; font-size: 1.0625rem; }
+
+        /* ==========================================
+           CTA
+        ========================================== */
+        .cta-section {
+            background: linear-gradient(135deg, #140003 0%, var(--black) 100%);
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1000px; height: 1000px;
+            background: radial-gradient(circle, rgba(213,62,15,0.18) 0%, rgba(94,0,6,0.06) 40%, transparent 70%);
+            z-index: 0;
+        }
+        .cta-content { position: relative; z-index: 1; }
+        .cta-title {
+            font-size: clamp(3rem, 7vw, 7rem);
+            margin-bottom: 30px;
+            color: var(--white);
+        }
+        .cta-title .highlight {
+            background: linear-gradient(135deg, var(--ember) 0%, var(--parchment) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px var(--cyan-glow));
+        }
+        .cta-description {
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--silver);
+        }
+        .cta-buttons { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; }
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+        .footer {
+            background-color: #000000;
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(213,62,15,0.25);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        .footer-brand { max-width: 400px; }
+        .footer-logo { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .footer-logo img { height: 50px; filter: brightness(0) invert(1); }
+        .footer-logo-text { font-family: var(--font-display); font-size: 2.5rem; color: var(--white); letter-spacing: 3px; }
+        .footer-description { font-size: 1rem; line-height: 1.8; color: var(--silver); margin-bottom: 30px; }
+
+        .social-links { display: flex; gap: 15px; }
+        .social-link {
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, rgba(213,62,15,0.1) 0%, rgba(94,0,6,0.05) 100%);
+            border: 2px solid rgba(213,62,15,0.35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ember);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--ember) 0%, var(--blood-red) 100%);
+            border-color: var(--ember);
+            color: var(--parchment);
+            box-shadow: 0 0 30px var(--cyan-glow);
+        }
+
+        .footer-column h4 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a {
+            color: var(--silver);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .footer-links a:hover { color: var(--parchment); padding-left: 10px; }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(213,62,15,0.15);
+            text-align: center;
+        }
+        .footer-bottom p {
+            font-size: 0.875rem;
+            color: var(--silver);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+        @media (max-width: 1200px) {
+            .manifesto-grid { grid-template-columns: 1fr; gap: 60px; }
+            .products-grid { gap: 40px; }
+            .process-steps, .benefits-grid { grid-template-columns: 1fr; gap: 40px; }
+            .product-features { grid-template-columns: 1fr; gap: 40px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+        @media (max-width: 768px) {
+            :root { --section-padding: 60px 0; }
+            .nav-menu {
+                position: fixed;
+                top: 88px; left: -100%;
+                width: 100%;
+                height: calc(100vh - 88px);
+                background-color: rgba(10,10,10,0.98);
+                flex-direction: column;
+                justify-content: center;
+                gap: 30px;
+                transition: left 0.3s ease;
+                border-top: 1px solid var(--ember);
+            }
+            .nav-menu.active { left: 0; }
+            .menu-toggle { display: flex; }
+            .products-grid { grid-template-columns: 1fr; }
+            .hero-stats { gap: 40px; }
+            .manifesto-stats { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hex-mesh"></div>
+    <div class="garage-light" id="garageLight"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="logo">
+                <img src="https://raw.githubusercontent.com/nikajcabales16/YMCsource/main/YMCC.png" alt="YMC Flame Logo">
+                <span class="logo-text">YMC<span class="accent">.</span>CLO</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#manifesto">Manifesto</a></li>
+                <li><a href="#collection">Collection</a></li>
+                <li><a href="#membership">Membership</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li>
+                    <a href="https://discord.gg/ymc" target="_blank" class="btn btn-primary discord-btn">
+                        <i class="fab fa-discord"></i> Join Discord
+                    </a>
+                </li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <p class="hero-tag fade-in">EST. 2023 // TRI-STATE AREA</p>
+            <h1 class="hero-title fade-in">
+                YO'S<br>
+                <span class="highlight">MIDNIGHT CLUB</span>
+            </h1>
+            <p class="hero-subtitle fade-in">BUILT NOT BOUGHT</p>
+            <p class="hero-description fade-in">
+                Not just a brand. A high-octane lifestyle. Built for the self-made, the garage rats, and the night crawlers. This is car culture for those who live and breathe it.
+            </p>
+            <div class="hero-cta fade-in">
+                <a href="#collection" class="btn btn-primary">Shop Drop 001</a>
+                <a href="#membership" class="btn btn-outline">Apply for Access</a>
+            </div>
+            <div class="hero-stats fade-in">
+                <div class="stat-item">
+                    <span class="stat-number">001</span>
+                    <span class="stat-label">Current Drop</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3+</span>
+                    <span class="stat-label">Years Building</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">LIMITED</span>
+                    <span class="stat-label">Member Slots</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <div class="cyan-stripe"></div>
+
+    <!-- MANIFESTO -->
+    <section class="manifesto-section section" id="manifesto">
+        <div class="container">
+            <div class="manifesto-grid">
+                <div class="manifesto-image fade-in">
+                    <img src="https://raw.githubusercontent.com/nikajcabales16/YMCsource/main/HERO1.png" alt="Scotty - Founder">
+                    <div class="founder-badge">
+                        <p class="founder-label">Founder</p>
+                        <h3 class="founder-name">SCOTTY</h3>
+                    </div>
+                </div>
+                <div class="manifesto-content fade-in">
+                    <p class="manifesto-tag">THE VISION</p>
+                    <h2 class="manifesto-title">BUILT NOT BOUGHT.</h2>
+                    <p><strong>YMC.clo</strong> and <strong>Funded Auto Brokerage</strong> aren't separate entities. They are the two pillars of <span class="highlight-cyan">YoFunded</span>.</p>
+                    <p>This isn't a 9-to-5 story. This is a 3-year grind. Selling tees to buy tools. Brokerage deals to fund builds.</p>
+                    <div class="manifesto-quote">
+                        <p>"The goal? A physical garage. A hub. A place where the Tri-State's sickest builds gather not for clout, but for culture. No 'takeover kids.' Just pure, unadulterated automotive passion."</p>
+                    </div>
+                    <p>This brand is about cars and a lifestyle. Streetwear meets car culture. For people who are <strong>extremely into cars</strong>. German engineering strictly highline, but all tuff builds are welcome as long as approved by me.</p>
+                    <div class="manifesto-stats">
+                        <div class="manifesto-stat">
+                            <span class="manifesto-stat-number">100%</span>
+                            <span class="manifesto-stat-label">Self-Made</span>
+                        </div>
+                        <div class="manifesto-stat">
+                            <span class="manifesto-stat-number">2</span>
+                            <span class="manifesto-stat-label">Revenue Streams</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLLECTION -->
+    <section class="collection-section section" id="collection">
+        <div class="container">
+            <div class="collection-header fade-in">
+                <p class="collection-tag">DROP 001</p>
+                <h2 class="collection-title">THE GARAGE COLLECTION</h2>
+                <p class="collection-description">
+                    Premium heavyweight cotton. Limited production. Each piece includes exclusive member access code. This is your entry into the culture.
+                </p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="https://raw.githubusercontent.com/nikajcabales16/YMCsource/main/WFront.png" alt="Shibuya Drift Tee - White">
+                        <div class="product-badge">NEW</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">SHIBUYA DRIFT TEE</h3>
+                        <p class="product-description">Heavyweight Cotton / Washed White</p>
+                        <span class="product-price">$55</span>
+                    </div>
+                </div>
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="https://raw.githubusercontent.com/nikajcabales16/YMCsource/main/Bfront.png" alt="Shibuya Drift Tee - Black">
+                        <div class="product-badge">NEW</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">SHIBUYA DRIFT TEE</h3>
+                        <p class="product-description">Heavyweight Cotton / Vintage Black</p>
+                        <span class="product-price">$55</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-features fade-in">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-cut"></i></div>
+                    <h4 class="feature-title">CUSTOM CUT</h4>
+                    <p class="feature-description">Boxy fit with distressed hems. 100% heavyweight cotton built to last.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-fire"></i></div>
+                    <h4 class="feature-title">PLASTISOL INK</h4>
+                    <p class="feature-description">High-density screen print that cracks with age. Built for character.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-id-card"></i></div>
+                    <h4 class="feature-title">MEMBER ID</h4>
+                    <p class="feature-description">Every tee includes a unique member access code to the club.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEMBERSHIP PROCESS -->
+    <section class="process-section section" id="membership">
+        <div class="container">
+            <div class="process-header fade-in">
+                <p class="process-tag">EXCLUSIVE ACCESS</p>
+                <h2 class="process-title">HOW TO JOIN</h2>
+                <p class="process-description">
+                    Membership is not given. It is earned. We're building a cult following for car geeks. If you don't know what a "hard pull" is, this isn't for you.
+                </p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step fade-in">
+                    <div class="step-number">01</div>
+                    <h3 class="step-title">BUY THE TEE</h3>
+                    <p class="step-description">Support the movement. Own the uniform. Drop 001 is live now. Each purchase gets you access.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">02</div>
+                    <h3 class="step-title">CHANGE YOUR NAME</h3>
+                    <p class="step-description">IG Username format:</p>
+                    <code class="step-code">[FirstName]Funded</code>
+                    <p class="step-description" style="margin-top:15px;font-size:0.95rem;">Example: ScottyFunded, KimFunded, AlexFunded</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">03</div>
+                    <h3 class="step-title">VERIFY YOUR BUILD</h3>
+                    <p class="step-description">Submit your car. German Highline preferred. All builds reviewed by Scotty. Tuff builds only.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="benefits-section section" id="benefits">
+        <div class="container">
+            <div class="benefits-header fade-in">
+                <p class="collection-tag">MEMBER PERKS</p>
+                <h2 class="collection-title">WHAT YOU GET</h2>
+                <p class="collection-description">This is more than streetwear. This is access to an exclusive automotive ecosystem.</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon"><i class="fas fa-users"></i></div>
+                    <h3 class="benefit-title">THE GARAGE</h3>
+                    <p class="benefit-description">Access to the private Discord. Late night runs, garage time, and a community that speaks your language.</p>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon"><i class="fas fa-camera"></i></div>
+                    <h3 class="benefit-title">EXPOSURE</h3>
+                    <p class="benefit-description">Your build featured on the main page. We showcase our members. You build it, we hype it.</p>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon"><i class="fas fa-handshake"></i></div>
+                    <h3 class="benefit-title">BROKERAGE PERKS</h3>
+                    <p class="benefit-description">Members get priority access and discounts on Funded Auto Brokerage services.</p>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon"><i class="fas fa-tag"></i></div>
+                    <h3 class="benefit-title">EARLY DROPS</h3>
+                    <p class="benefit-description">First look at new releases before public launch. Members eat first.</p>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon"><i class="fas fa-calendar-days"></i></div>
+                    <h3 class="benefit-title">EXCLUSIVE EVENTS</h3>
+                    <p class="benefit-description">Private meetups, track days, and garage sessions throughout the Tri-State area.</p>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="benefit-title">VERIFIED STATUS</h3>
+                    <p class="benefit-description">Official YMC member verification. Recognition within the community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <div class="cta-content fade-in">
+                <h2 class="cta-title">READY TO JOIN<br><span class="highlight">THE CLUB?</span></h2>
+                <p class="cta-description">Limited membership slots available. Once the garage is full, applications close.</p>
+                <div class="cta-buttons">
+                    <a href="#collection" class="btn btn-primary">Shop Collection</a>
+                    <a href="https://discord.gg/ymc" target="_blank" class="btn btn-outline">Join Discord</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="https://raw.githubusercontent.com/nikajcabales16/YMCsource/main/YMCC.png" alt="YMC Logo">
+                        <span class="footer-logo-text">YMC.CLO</span>
+                    </div>
+                    <p class="footer-description">A lifestyle brand born from the asphalt of the Tri-State area. Built for the self-made, the tuners, and the night crawlers. Part of the YoFunded movement.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/ymc.clo" target="_blank" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://discord.gg/ymc" target="_blank" class="social-link" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="https://tiktok.com/@ymc.clo" target="_blank" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>SHOP</h4>
+                    <ul class="footer-links">
+                        <li><a href="#collection">Collection</a></li>
+                        <li><a href="#collection">Drop 001</a></li>
+                        <li><a href="#membership">Membership</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>COMPANY</h4>
+                    <ul class="footer-links">
+                        <li><a href="#manifesto">About</a></li>
+                        <li><a href="https://batonvalley.online" target="_blank">Funded Auto Brokerage</a></li>
+                        <li><a href="mailto:contact@ymc.clo">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>COMMUNITY</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://discord.gg/ymc" target="_blank">Discord</a></li>
+                        <li><a href="https://instagram.com/ymc.clo" target="_blank">Instagram</a></li>
+                        <li><a href="#benefits">Member Benefits</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 YMC.CLO × FUNDED AUTO BROKERAGE // DESIGNED FOR THE CULTURE</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Fade-in on scroll
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => fadeInObserver.observe(el));
+
+        // Garage light cursor follow
+        const garageLight = document.getElementById('garageLight');
+        document.addEventListener('mousemove', (e) => {
+            garageLight.style.left = e.clientX + 'px';
+            garageLight.style.top  = e.clientY + 'px';
+        });
+    </script>
+
+</body>
+</html>
